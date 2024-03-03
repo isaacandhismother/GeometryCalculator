@@ -67,7 +67,7 @@
  [],
  False,
  False,
- 1709140962,
+ 1709452559,
  [('runw.exe',
    'G:\\Math '
    'calculator\\venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw.exe',
