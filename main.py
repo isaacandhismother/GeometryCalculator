@@ -14,7 +14,7 @@ def main():
     main_window.setFixedSize(500, 400)
     main_window.setWindowTitle('Geometry calculator')
 
-# -------------- Figure list ----------------
+    # -------------- Figure list ----------------
 
     figure_list = []
 
@@ -46,7 +46,7 @@ def main():
     circle_area = None
     figure_list.append(circle)
 
-# -------------------------------------------
+    # -------------------------------------------
 
     def change_figure(text):
         if text == 'Square':
@@ -77,25 +77,26 @@ def main():
 
         if choose_figure_box.currentText() == 'Square':
             if a != '' and int(a) > 0:
-                square_area = str(int(a)**2)
+                square_area = str(int(a) ** 2)
                 area_value.setText(square_area)
         if choose_figure_box.currentText() == 'Triangle':
             if a != '' and int(a) > 0:
                 if h != '' and int(h) > 0:
-                    triangle_area = str((int(a)*int(h))/2)
+                    triangle_area = str((int(a) * int(h)) / 2)
                     area_value.setText(triangle_area)
-                elif b != '' and int(b) > 0 and c != '' and int(c) > 0:
-                    p = (int(a) + int(b) + int(c))/2
-                    non_sqrt_area = p*(p-int(a))*(p-int(b))*(p-int(c))
+                elif b != '' and int(b) > 0 and c != '' and 0 < int(c) < int(a) + int(
+                        b) and int(a) + int(c) > int(b) and int(b) + int(c) > int(a):
+                    p = (int(a) + int(b) + int(c)) / 2
+                    non_sqrt_area = p * (p - int(a)) * (p - int(b)) * (p - int(c))
                     triangle_area = str(sqrt(non_sqrt_area))
                     area_value.setText(triangle_area)
         if choose_figure_box.currentText() == 'Rectangle':
             if a != '' and int(a) > 0 and b != '' and int(b) > 0:
-                rectangle_area = str(int(a)*int(b))
+                rectangle_area = str(int(a) * int(b))
                 area_value.setText(rectangle_area)
         if choose_figure_box.currentText() == 'Circle':
             if r != '' and int(r) > 0:
-                circle_area = str(round(pi, 2)*(int(r)**2))
+                circle_area = str(round(pi, 2) * (int(r) ** 2))
                 area_value.setText(circle_area)
 
     def calculate_perimeter():
@@ -108,22 +109,23 @@ def main():
 
         if choose_figure_box.currentText() == 'Square':
             if a != '' and int(a) > 0:
-                square_perimeter = str(int(a)*4)
+                square_perimeter = str(int(a) * 4)
                 perimeter_value.setText(square_perimeter)
         if choose_figure_box.currentText() == 'Triangle':
-            if a != '' and int(a) > 0 and b != '' and int(b) > 0 and c != '' and int(c) > 0:
-                triangle_perimeter = str(int(a)+int(b)+int(c))
+            if b != '' and int(b) > 0 and c != '' and 0 < int(c) < int(a) + int(
+                    b) and int(a) + int(c) > int(b) and int(b) + int(c) > int(a):
+                triangle_perimeter = str(int(a) + int(b) + int(c))
                 perimeter_value.setText(triangle_perimeter)
         if choose_figure_box.currentText() == 'Rectangle':
             if a != '' and int(a) > 0 and b != '' and int(b) > 0:
-                rectangle_perimeter = str(int(a)*2 + int(b)*2)
+                rectangle_perimeter = str(int(a) * 2 + int(b) * 2)
                 perimeter_value.setText(rectangle_perimeter)
         if choose_figure_box.currentText() == 'Circle':
             if r != '' and int(r) > 0:
-                circle_perimeter = str(round(pi, 2)*2*int(r))
+                circle_perimeter = str(round(pi, 2) * 2 * int(r))
                 perimeter_value.setText(circle_perimeter)
 
-# ----------- Main window section -----------
+    # ----------- Main window section -----------
 
     calculate_area_button = QPushButton(main_window)
     calculate_area_button.setText('Calculate Area')
@@ -186,7 +188,7 @@ def main():
     triangle.append(triangle_perimeter_formula)
 
     first_triangle_area_formula = QLabel(main_window)
-    first_triangle_area_formula.setText('S₁ = a * h')
+    first_triangle_area_formula.setText('S₁ = (a * h)/2')
     first_triangle_area_formula.move(150, 60)
     triangle.append(first_triangle_area_formula)
 
@@ -260,6 +262,11 @@ def main():
     enter_h.move(350, 133)
     triangle.append(enter_h)
 
+    if_h_is_given = QLabel(main_window)
+    if_h_is_given.setText('(if h is given area is calcu-\nlated with (a*h)/2 formula)')
+    if_h_is_given.move(350, 155)
+    triangle.append(if_h_is_given)
+
     enter_h_field = QLineEdit(main_window)
     enter_h_field.resize(100, 19)
     enter_h_field.move(370, 130)
@@ -303,7 +310,7 @@ def main():
     circle_image.move(10, 110)
     circle.append(circle_image)
 
-# -------------------------------------------
+    # -------------------------------------------
 
     main_window.show()
     show_figure(square)
